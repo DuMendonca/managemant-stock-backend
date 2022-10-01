@@ -5,7 +5,7 @@ import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Entity
-public class Produtos_Pedidos
+public class Products_Requests
 {
 	private Long id;
 
@@ -18,7 +18,7 @@ public class Produtos_Pedidos
 	@Column(name = "qtd_produtos")
 	private Integer quantidadeProdutos;
 
-	public Produtos_Pedidos()
+	public Products_Requests()
 	{
 
 	}

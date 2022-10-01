@@ -1,14 +1,11 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Entity
-public class Produto
+public class Product
 {
 	@Column(name = "cod_prod")
 	private Long codProduto;
@@ -22,13 +19,13 @@ public class Produto
 	@Column(name = "valor_prod")
 	private Long valorProduto;
 
-	public Produto()
+	public Product()
 	{
 
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getCodProduto()
 	{
 		return codProduto;

@@ -1,25 +1,22 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import javax.persistence.*;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
 @Entity
-public class Destinatario
+public class Recipient
 {
 	@Column(name = "cod_destinatario")
 	private Long codDestinatario;
 
-	public Destinatario()
+	public Recipient()
 	{
 
 	}
 
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	public Long getCodDestinatario()
 	{
 		return codDestinatario;
