@@ -14,5 +14,9 @@ S
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
 Œ
 \src/main/java/com/gerenciamentoestoque/chegaRapidex/application/ChegaRapidexApplication.java,e\6\e65179782f46411c0e70d2a4302969943bd935d8
-x
-Hsrc/main/java/com/gerenciamentoestoque/chegaRapidex/entities/Sender.java,5\e\5e9b1e0521893f80d75199d1225264f7b878b95f
+‰
+Ysrc/main/java/com/gerenciamentoestoque/chegaRapidex/repositories/RecipientRepository.java,9\4\9471890b4a70516574cded03505c00958b6eb9c2
+‡
+Wsrc/main/java/com/gerenciamentoestoque/chegaRapidex/repositories/RequestRepository.java,0\9\09831035731cf7059bc98bed2fd782fc688c72d8
+†
+Vsrc/main/java/com/gerenciamentoestoque/chegaRapidex/repositories/SenderRepository.java,a\5\a568744a82152ba4cb48f68208af7aae53f24b4d

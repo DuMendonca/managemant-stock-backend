@@ -2,7 +2,6 @@ package com.gerenciamentoestoque.chegaRapidex.controller;
 
 import com.gerenciamentoestoque.chegaRapidex.entities.Request;
 import com.gerenciamentoestoque.chegaRapidex.service.RequestService;
-import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -20,7 +19,7 @@ public class RequestController
 	}
 
 	@GetMapping
-	public List<Request> findAllRequests() {
+	public ResponseEntity<Object> findAllRequests() {
 		return service.findAllRequests();
 	}
 
@@ -30,12 +29,12 @@ public class RequestController
 	}
 
 	@PutMapping(path = {"/{id}"})
-	public ResponseEntity<Request> updateRequest(@PathVariable Long id, Request request) {
+	public ResponseEntity<Request> updateRequest(@PathVariable Long id, @RequestBody Request request) {
 		return service.updateRequest(id, request);
 	}
 
 	@PostMapping
-	public ResponseEntity<Request> createRequest(Request request) {
+	public Request createRequest(@RequestBody Request request) {
 		return service.createRequest(request);
 	}
 

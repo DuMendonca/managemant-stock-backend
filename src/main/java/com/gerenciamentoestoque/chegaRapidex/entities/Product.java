@@ -1,68 +1,61 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-@Entity
+@Entity(name = "Produtos")
 public class Product
 {
 	@Column(name = "cod_prod")
-	private Long codProduto;
+	private Long productId;
 
 	@Column(name = "nome_prod")
-	private String nomeProduto;
+	private String productName;
 
 	@Column(name = "peso_prod")
-	private Integer pesoProduto;
+	private Integer productWeight;
 
 	@Column(name = "valor_prod")
-	private Long valorProduto;
-
-	public Product()
-	{
-
-	}
+	private Long productValue;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getCodProduto()
+	@GeneratedValue
+	public Long getProductId()
 	{
-		return codProduto;
+		return productId;
 	}
 
-	public void setCodProduto(Long codProduto)
+	public void setProductId(Long productId)
 	{
-		this.codProduto = codProduto;
+		this.productId = productId;
 	}
 
-	public String getNomeProduto()
+	public String getProductName()
 	{
-		return nomeProduto;
+		return productName;
 	}
 
-	public void setNomeProduto(String nomeProduto)
+	public void setProductName(String productName)
 	{
-		this.nomeProduto = nomeProduto;
+		this.productName = productName;
 	}
 
-	public Integer getPesoProduto()
+	public Integer getProductWeight()
 	{
-		return pesoProduto;
+		return productWeight;
 	}
 
-	public void setPesoProduto(Integer pesoProduto)
+	public void setProductWeight(Integer productWeight)
 	{
-		this.pesoProduto = pesoProduto;
+		this.productWeight = productWeight;
 	}
 
-	public Long getValorProduto()
+	public Long getProductValue()
 	{
-		return valorProduto;
+		return productValue;
 	}
 
-	public void setValorProduto(Long valorProduto)
+	public void setProductValue(Long productValue)
 	{
-		this.valorProduto = valorProduto;
+		this.productValue = productValue;
 	}
 }

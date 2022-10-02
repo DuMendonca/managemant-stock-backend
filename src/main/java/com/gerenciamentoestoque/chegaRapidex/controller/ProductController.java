@@ -20,7 +20,7 @@ public class ProductController
 	}
 
 	@GetMapping
-	public List<Product> findAllProducts() {
+	public ResponseEntity<List<Product>> findAllProducts() {
 		return service.findAllProducts();
 	}
 
@@ -30,13 +30,13 @@ public class ProductController
 	}
 
 	@PutMapping(path = {"/{id}"})
-	public ResponseEntity<Product> updateProduct(@PathVariable Long id, Product Product) {
-		return service.updateProduct(id, Product);
+	public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+		return service.updateProduct(id, product);
 	}
 
 	@PostMapping
-	public ResponseEntity<Product> createProduct(Product Product) {
-		return service.createProduct(Product);
+	public Product createProduct(@RequestBody Product product) {
+		return service.createProduct(product);
 	}
 
 	@DeleteMapping

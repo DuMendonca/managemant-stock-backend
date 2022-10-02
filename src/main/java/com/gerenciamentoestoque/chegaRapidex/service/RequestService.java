@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class RequestService
@@ -14,44 +13,49 @@ public class RequestService
 	@Autowired
 	private RequestRepository repository;
 
-	public ResponseEntity<Request> findRequestById(@PathVariable Long id){
+	public ResponseEntity<Request> findRequestById(Long id){
 		return repository.findById(id)
 			.map(response -> ResponseEntity.ok().body(response))
 			.orElse(ResponseEntity.notFound().build());
 	}
 
-	public List<Request> findAllRequests() {
-		return repository.findAll();
-	}
-
-	public void deleteRequestById(@PathVariable Long id) {
-		if (repository.findById(id).isPresent()) {
-			repository.deleteById(id);
-			ResponseEntity.ok().build();
-		} else {
-			ResponseEntity.notFound().build();
+	public ResponseEntity<Object> findAllRequests() {
+		List<Request> requests = repository.findAll();
+		if (requests.isEmpty()) {
+			return ResponseEntity.notFound().build();
 		}
+		return ResponseEntity.ok().body(requests);
 	}
 
-	public ResponseEntity<Request> updateRequest(@PathVariable Long id, Request request) {
-		repository.findById(id)
-			.map(response -> ResponseEntity.ok().body(response))
-			.orElse(ResponseEntity.notFound().build());
-		return ResponseEntity.ok().build();
+	public ResponseEntity<Object> deleteRequestById(Long id) {
+		return repository.findById(id)
+			.map(response -> {
+				repository.deleteById(id);
+				return ResponseEntity.ok().build();
+			}).orElse(ResponseEntity.notFound().build());
 	}
 
-	public ResponseEntity<Request> createRequest(Request request) {
-		repository.saveAndFlush(request);
-		return ResponseEntity.ok().build();
+	public ResponseEntity<Request> updateRequest(Long id, Request request) {
+		return repository.findById(id)
+			.map(response -> {
+				response.setRequestDate(request.getRequestDate());
+				response.setRequestTotalValue(request.getRequestTotalValue());
+				response.setRequestTotalWeight(request.getRequestTotalWeight());
+				Request requestUpdated = repository.save(response);
+				return ResponseEntity.ok().body(requestUpdated);
+			}).orElse(ResponseEntity.notFound().build());
+	}
+
+	public Request createRequest(Request request) {
+		return repository.save(request);
 	}
 
 	public ResponseEntity<Request> deleteAllRequests() {
-		if (!repository.findAll().isEmpty())
-		{
-			repository.deleteAll();
-			return ResponseEntity.ok().build();
+		List<Request> requests = repository.findAll();
+		if (requests.isEmpty()) {
+			return ResponseEntity.notFound().build();
 		}
-
-		return ResponseEntity.noContent().build();
+		repository.deleteAll();
+		return ResponseEntity.ok().build();
 	}
 }

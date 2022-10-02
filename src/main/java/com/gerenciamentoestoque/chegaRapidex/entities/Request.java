@@ -2,68 +2,61 @@ package com.gerenciamentoestoque.chegaRapidex.entities;
 
 import java.sql.Date;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-@Entity
+@Entity(name = "Pedidos")
 public class Request
 {
 	@Column(name = "cod_pedido")
-	private Long codPedido;
+	private Long requestId;
 
 	@Column(name = "peso_total")
-	private Integer pesoTotalPedido;
+	private Integer requestTotalWeight;
 
 	@Column(name = "dt_pedido")
-	private Date dataPedido;
+	private Date requestDate;
 
 	@Column(name = "valor_pedido")
-	private Long valorTotalPedido;
-
-	public Request()
-	{
-
-	}
+	private Long requestTotalValue;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getCodPedido()
+	@GeneratedValue
+	public Long getRequestId()
 	{
-		return codPedido;
+		return requestId;
 	}
 
-	public void setCodPedido(Long codPedido)
+	public void setRequestId(Long requestId)
 	{
-		this.codPedido = codPedido;
+		this.requestId = requestId;
 	}
 
-	public Integer getPesoTotalPedido()
+	public Integer getRequestTotalWeight()
 	{
-		return pesoTotalPedido;
+		return requestTotalWeight;
 	}
 
-	public void setPesoTotalPedido(Integer pesoTotalPedido)
+	public void setRequestTotalWeight(Integer requestTotalWeight)
 	{
-		this.pesoTotalPedido = pesoTotalPedido;
+		this.requestTotalWeight = requestTotalWeight;
 	}
 
-	public Date getDataPedido()
+	public Date getRequestDate()
 	{
-		return dataPedido;
+		return requestDate;
 	}
 
-	public void setDataPedido(Date dataPedido)
+	public void setRequestDate(Date requestDate)
 	{
-		this.dataPedido = dataPedido;
+		this.requestDate = requestDate;
 	}
 
-	public Long getValorTotalPedido()
+	public Long getRequestTotalValue()
 	{
-		return valorTotalPedido;
+		return requestTotalValue;
 	}
 
-	public void setValorTotalPedido(Long valorTotalPedido)
+	public void setRequestTotalValue(Long requestTotalValue)
 	{
-		this.valorTotalPedido = valorTotalPedido;
+		this.requestTotalValue = requestTotalValue;
 	}
 }

@@ -1,29 +1,88 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
+import java.sql.Date;
 import javax.persistence.*;
-import lombok.AllArgsConstructor;
 
-@AllArgsConstructor
-@Entity
+@Entity(name = "Destinatario")
 public class Recipient
 {
 	@Column(name = "cod_destinatario")
-	private Long codDestinatario;
+	private Long recipientId;
 
-	public Recipient()
-	{
+	@Column(name = "nome_destinatario")
+	private String recipientName;
 
-	}
+	@Column(name = "dt_nasc")
+	private Date recipientBirthDate;
+
+	@Column(name = "cpf")
+	private Integer cpf;
+
+	@Column(name = "rg")
+	private Integer rg;
+
+	@Column(name = "cod_endereco")
+	private Integer addressId;
 
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	public Long getCodDestinatario()
+	@GeneratedValue
+	public Long getRecipientId()
 	{
-		return codDestinatario;
+		return recipientId;
 	}
 
-	public void setCodDestinatario(Long codDestinatario)
+	public void setRecipientId(Long recipientId)
 	{
-		this.codDestinatario = codDestinatario;
+		this.recipientId = recipientId;
+	}
+
+	public String getRecipientName()
+	{
+		return recipientName;
+	}
+
+	public void setRecipientName(String recipientName)
+	{
+		this.recipientName = recipientName;
+	}
+
+	public Date getRecipientBirthDate()
+	{
+		return recipientBirthDate;
+	}
+
+	public void setRecipientBirthDate(Date recipientBirthDate)
+	{
+		this.recipientBirthDate = recipientBirthDate;
+	}
+
+	public Integer getCpf()
+	{
+		return cpf;
+	}
+
+	public void setCpf(Integer cpf)
+	{
+		this.cpf = cpf;
+	}
+
+	public Integer getRg()
+	{
+		return rg;
+	}
+
+	public void setRg(Integer rg)
+	{
+		this.rg = rg;
+	}
+
+	public Integer getAddressId()
+	{
+		return addressId;
+	}
+
+	public void setAddressId(Integer addressId)
+	{
+		this.addressId = addressId;
 	}
 }

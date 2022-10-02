@@ -6,7 +6,6 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.PathVariable;
 
 @Service
 public class SenderService
@@ -14,44 +13,51 @@ public class SenderService
 	@Autowired
 	private SenderRepository repository;
 
-	public ResponseEntity<Sender> findSenderById(@PathVariable Long id){
+	public ResponseEntity<Sender> findSenderById(Long id){
 		return repository.findById(id)
 			.map(response -> ResponseEntity.ok().body(response))
 			.orElse(ResponseEntity.notFound().build());
 	}
 
-	public List<Sender> findAllSenders() {
-		return repository.findAll();
-	}
-
-	public void deleteSenderById(@PathVariable Long id) {
-		if (repository.findById(id).isPresent()) {
-			repository.deleteById(id);
-			ResponseEntity.ok().build();
-		} else {
-			ResponseEntity.notFound().build();
+	public ResponseEntity<Object> findAllSenders() {
+		List<Sender> senders = repository.findAll();
+		if (senders.isEmpty()) {
+			return ResponseEntity.notFound().build();
 		}
+		return ResponseEntity.ok().body(senders);
 	}
 
-	public ResponseEntity<Sender> updateSender(@PathVariable Long id, Sender sender) {
-		repository.findById(id)
-			.map(response -> ResponseEntity.ok().body(response))
-			.orElse(ResponseEntity.notFound().build());
-		return ResponseEntity.ok().build();
+	public ResponseEntity<Object> deleteSenderById(Long id) {
+		return repository.findById(id)
+			.map(response -> {
+				repository.deleteById(id);
+				return ResponseEntity.ok().build();
+			}).orElse(ResponseEntity.notFound().build());
 	}
 
-	public ResponseEntity<Sender> createSender(Sender sender) {
-		repository.saveAndFlush(sender);
-		return ResponseEntity.ok().build();
+	public ResponseEntity<Sender> updateSender(Long id, Sender sender) {
+		return repository.findById(id)
+			.map(response -> {
+				response.setSenderName(sender.getSenderName());
+				response.setCpf(sender.getCpf());
+				response.setRg(sender.getRg());
+				response.setSenderBirthDate(sender.getSenderBirthDate());
+				response.setAddressId(sender.getAddressId());
+				Sender senderUpdated = repository.save(response);
+				return ResponseEntity.ok().body(senderUpdated);
+			}).orElse(ResponseEntity.notFound().build());
+	}
+
+	public Sender createSender(Sender sender) {
+		return repository.save(sender);
 	}
 
 	public ResponseEntity<Sender> deleteAllSenders() {
-		if (!repository.findAll().isEmpty())
-		{
-			repository.deleteAll();
-			return ResponseEntity.ok().build();
+		List<Sender> senders = repository.findAll();
+		if (senders.isEmpty()) {
+			return ResponseEntity.notFound().build();
 		}
-
-		return ResponseEntity.noContent().build();
+		repository.deleteAll();
+		return ResponseEntity.ok().build();
 	}
 }
