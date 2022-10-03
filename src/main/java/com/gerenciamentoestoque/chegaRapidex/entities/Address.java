@@ -1,13 +1,15 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.Id;
+import java.util.List;
+import javax.persistence.*;
 
-@Entity(name = "Endereco")
+@Entity
+@Table(name = "Endereco")
 public class Address
 {
+	// attributes
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_endereco")
 	private Long addressId;
 
@@ -20,8 +22,15 @@ public class Address
 	@Column(name = "numero")
 	private Integer number;
 
-	@Id
-	@GeneratedValue
+	@OneToMany(mappedBy = "address")
+	@JoinColumn(name = "cod_endereco", nullable = false)
+	private List<Sender> senderList;
+
+	@OneToMany(mappedBy = "address")
+	@JoinColumn(name = "cod_endereco", nullable = false)
+	private List<Recipient> recipientList;
+
+	// getters and setters
 	public Long getAddressId()
 	{
 		return addressId;
@@ -60,5 +69,25 @@ public class Address
 	public void setNumber(Integer number)
 	{
 		this.number = number;
+	}
+
+	public List<Sender> getSenderList()
+	{
+		return senderList;
+	}
+
+	public void setSenderList(List<Sender> senderList)
+	{
+		this.senderList = senderList;
+	}
+
+	public List<Recipient> getRecipientList()
+	{
+		return recipientList;
+	}
+
+	public void setRecipientList(List<Recipient> recipientList)
+	{
+		this.recipientList = recipientList;
 	}
 }

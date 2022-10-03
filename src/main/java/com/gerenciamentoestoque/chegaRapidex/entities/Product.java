@@ -1,10 +1,15 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
+import java.util.List;
 import javax.persistence.*;
 
-@Entity(name = "Produtos")
+@Entity
+@Table(name = "Produtos")
 public class Product
 {
+	// attributes
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_prod")
 	private Long productId;
 
@@ -17,8 +22,11 @@ public class Product
 	@Column(name = "valor_prod")
 	private Long productValue;
 
-	@Id
-	@GeneratedValue
+	@OneToMany(mappedBy = "product")
+	@JoinColumn(name = "cod_prod", nullable = false)
+	private List<ProductsInRequests> productsInRequestsList;
+
+	// getters and setters
 	public Long getProductId()
 	{
 		return productId;
@@ -57,5 +65,15 @@ public class Product
 	public void setProductValue(Long productValue)
 	{
 		this.productValue = productValue;
+	}
+
+	public List<ProductsInRequests> getProductsInRequestsList()
+	{
+		return productsInRequestsList;
+	}
+
+	public void setProductsInRequestsList(List<ProductsInRequests> productsInRequestsList)
+	{
+		this.productsInRequestsList = productsInRequestsList;
 	}
 }

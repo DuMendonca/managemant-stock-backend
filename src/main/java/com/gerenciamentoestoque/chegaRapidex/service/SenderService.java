@@ -42,7 +42,7 @@ public class SenderService
 				response.setCpf(sender.getCpf());
 				response.setRg(sender.getRg());
 				response.setSenderBirthDate(sender.getSenderBirthDate());
-				response.setAddressId(sender.getAddressId());
+				response.setAddress(sender.getAddress());
 				Sender senderUpdated = repository.save(response);
 				return ResponseEntity.ok().body(senderUpdated);
 			}).orElse(ResponseEntity.notFound().build());

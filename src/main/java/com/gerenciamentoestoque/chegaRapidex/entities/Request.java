@@ -1,11 +1,16 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
 import java.sql.Date;
+import java.util.List;
 import javax.persistence.*;
 
-@Entity(name = "Pedidos")
+@Entity
+@Table(name = "Pedidos")
 public class Request
 {
+	// attributes
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_pedido")
 	private Long requestId;
 
@@ -18,8 +23,20 @@ public class Request
 	@Column(name = "valor_pedido")
 	private Long requestTotalValue;
 
-	@Id
-	@GeneratedValue
+	@ManyToOne
+	private Recipient recipient;
+
+	@ManyToOne
+	private Sender sender;
+
+	@ManyToOne
+	private RequestStatus requestStatus;
+
+	@OneToMany(mappedBy = "request")
+	@JoinColumn(name = "cod_pedido", nullable = false)
+	private List<ProductsInRequests> productsInRequestsList;
+
+	// getters and  setters
 	public Long getRequestId()
 	{
 		return requestId;
@@ -58,5 +75,45 @@ public class Request
 	public void setRequestTotalValue(Long requestTotalValue)
 	{
 		this.requestTotalValue = requestTotalValue;
+	}
+
+	public Recipient getRecipient()
+	{
+		return recipient;
+	}
+
+	public void setRecipient(Recipient recipient)
+	{
+		this.recipient = recipient;
+	}
+
+	public Sender getSender()
+	{
+		return sender;
+	}
+
+	public void setSender(Sender sender)
+	{
+		this.sender = sender;
+	}
+
+	public RequestStatus getRequestStatus()
+	{
+		return requestStatus;
+	}
+
+	public void setRequestStatus(RequestStatus requestStatus)
+	{
+		this.requestStatus = requestStatus;
+	}
+
+	public List<ProductsInRequests> getProductsInRequestsList()
+	{
+		return productsInRequestsList;
+	}
+
+	public void setProductsInRequestsList(List<ProductsInRequests> productsInRequestsList)
+	{
+		this.productsInRequestsList = productsInRequestsList;
 	}
 }

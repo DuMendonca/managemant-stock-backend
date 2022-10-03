@@ -1,12 +1,17 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
 import java.sql.Date;
+import java.util.List;
 import javax.persistence.*;
 
 
-@Entity(name = "Remetente")
+@Entity
+@Table(name = "Remetente")
 public class Sender
 {
+	// attributes
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "cod_remetente")
 	private Long senderId;
 
@@ -22,11 +27,14 @@ public class Sender
 	@Column(name = "rg")
 	private Integer rg;
 
-	@Column(name = "cod_endereco")
-	private Integer addressId;
+	@ManyToOne
+	private Address address;
 
-	@Id
-	@GeneratedValue
+	@OneToMany(mappedBy = "sender")
+	@JoinColumn(name = "cod_remetente", nullable = false)
+	private List<Request> requestList;
+
+	// getters and setters
 	public Long getSenderId()
 	{
 		return senderId;
@@ -77,13 +85,23 @@ public class Sender
 		this.rg = rg;
 	}
 
-	public Integer getAddressId()
+	public Address getAddress()
 	{
-		return addressId;
+		return address;
 	}
 
-	public void setAddressId(Integer addressId)
+	public void setAddress(Address address)
 	{
-		this.addressId = addressId;
+		this.address = address;
+	}
+
+	public List<Request> getRequestList()
+	{
+		return requestList;
+	}
+
+	public void setRequestList(List<Request> requestList)
+	{
+		this.requestList = requestList;
 	}
 }

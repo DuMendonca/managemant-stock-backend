@@ -42,7 +42,7 @@ public class RecipientService
 				response.setRecipientBirthDate(recipient.getRecipientBirthDate());
 				response.setCpf(recipient.getCpf());
 				response.setRg(recipient.getRg());
-				response.setAddressId(recipient.getAddressId());
+				response.setAddress(recipient.getAddress());
 				Recipient recipientUpdated = repository.save(response);
 				return ResponseEntity.ok().body(recipientUpdated);
 			}).orElse(ResponseEntity.notFound().build());
