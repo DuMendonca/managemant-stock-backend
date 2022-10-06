@@ -1,16 +1,20 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Endereco")
-public class Address
+public class Address implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	// attributes
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "cod_endereco")
+	@GeneratedValue
+	@Column(name = "cod_end")
 	private Long addressId;
 
 	@Column(name = "cidade")
@@ -22,12 +26,12 @@ public class Address
 	@Column(name = "numero")
 	private Integer number;
 
-	@OneToMany(mappedBy = "address")
-	@JoinColumn(name = "cod_endereco", nullable = false)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "addressSender")
+	@JsonManagedReference(value = "address-sender")
 	private List<Sender> senderList;
 
-	@OneToMany(mappedBy = "address")
-	@JoinColumn(name = "cod_endereco", nullable = false)
+	@OneToMany(fetch = FetchType.LAZY, mappedBy = "addressRecipient")
+	@JsonManagedReference(value = "address-recipient")
 	private List<Recipient> recipientList;
 
 	// getters and setters

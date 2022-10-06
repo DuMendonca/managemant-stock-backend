@@ -3,11 +3,13 @@ package com.gerenciamentoestoque.chegaRapidex.service;
 import com.gerenciamentoestoque.chegaRapidex.entities.RequestStatus;
 import com.gerenciamentoestoque.chegaRapidex.repositories.RequestStatusRepository;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class RequestStatusService
 {
 	@Autowired
@@ -38,14 +40,14 @@ public class RequestStatusService
 	public ResponseEntity<RequestStatus> updateRequestStatus(Long id, RequestStatus requestStatus) {
 		return repository.findById(id)
 			.map(response -> {
-				response.setDescriptionStatus(response.getDescriptionStatus());
-				RequestStatus requestStatusUpdated = repository.save(response);
+				response.setDescriptionStatus(requestStatus.getDescriptionStatus());
+				RequestStatus requestStatusUpdated = repository.saveAndFlush(response);
 				return ResponseEntity.ok().body(requestStatusUpdated);
 			}).orElse(ResponseEntity.notFound().build());
 	}
 
 	public RequestStatus createRequestStatus(RequestStatus requestStatus) {
-		return repository.save(requestStatus);
+		return repository.saveAndFlush(requestStatus);
 	}
 
 	public ResponseEntity<RequestStatus> deleteAllRequestStatus() {

@@ -1,21 +1,26 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import java.io.Serializable;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Pedidos_Produtos")
-public class ProductsInRequests
+public class ProductsInRequests implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	// attributes
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "pedidos_produtos_id")
-	private Long productsRequestsId;
-
 	@ManyToOne
+	@JoinColumn(name = "cod_prod", referencedColumnName = "cod_prod")
+	@JsonBackReference(value = "productInRequest")
 	private Product product;
 
+	@Id
 	@ManyToOne
+	@JoinColumn(name = "cod_pedido", referencedColumnName = "cod_pedido")
+	@JsonBackReference(value = "requestHasProduct")
 	private Request request;
 
 	@Column(name = "qtd_prod")
@@ -50,15 +55,5 @@ public class ProductsInRequests
 	public void setQuantityProduct(Integer quantityProduct)
 	{
 		this.quantityProduct = quantityProduct;
-	}
-
-	public Long getProductsRequestsId()
-	{
-		return productsRequestsId;
-	}
-
-	public void setProductsRequestsId(Long productsRequestsId)
-	{
-		this.productsRequestsId = productsRequestsId;
 	}
 }

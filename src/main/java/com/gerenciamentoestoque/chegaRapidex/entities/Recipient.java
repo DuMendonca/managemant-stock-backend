@@ -1,36 +1,43 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Destinatario")
-public class Recipient
+public class Recipient implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	// attributes
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	@Column(name = "cod_destinatario")
 	private Long recipientId;
 
-	@Column(name = "nome_destinatario")
+	@Column(name = "nm_destinatario")
 	private String recipientName;
 
 	@Column(name = "dt_nasc")
 	private Date recipientBirthDate;
 
 	@Column(name = "cpf")
-	private Integer cpf;
+	private String cpf;
 
 	@Column(name = "rg")
-	private Integer rg;
+	private String rg;
 
-	@ManyToOne
-	private Address address;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cod_endereco", referencedColumnName = "cod_end")
+	@JsonBackReference(value = "address-recipient")
+	private Address addressRecipient;
 
 	@OneToMany(mappedBy = "recipient")
-	@JoinColumn(name = "cod_destinatario", nullable = false)
+	@JsonManagedReference(value = "request-recipient")
 	private List<Request> requestList;
 
 	// getters and setters
@@ -64,34 +71,34 @@ public class Recipient
 		this.recipientBirthDate = recipientBirthDate;
 	}
 
-	public Integer getCpf()
+	public String getCpf()
 	{
 		return cpf;
 	}
 
-	public void setCpf(Integer cpf)
+	public void setCpf(String cpf)
 	{
 		this.cpf = cpf;
 	}
 
-	public Integer getRg()
+	public String getRg()
 	{
 		return rg;
 	}
 
-	public void setRg(Integer rg)
+	public void setRg(String rg)
 	{
 		this.rg = rg;
 	}
 
-	public Address getAddress()
+	public Address getAddressRecipient()
 	{
-		return address;
+		return addressRecipient;
 	}
 
-	public void setAddress(Address address)
+	public void setAddressRecipient(Address addressRecipient)
 	{
-		this.address = address;
+		this.addressRecipient = addressRecipient;
 	}
 
 	public List<Request> getRequestList()

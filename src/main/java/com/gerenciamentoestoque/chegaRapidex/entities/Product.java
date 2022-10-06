@@ -1,29 +1,33 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Produtos")
-public class Product
+public class Product implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	// attributes
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	@Column(name = "cod_prod")
 	private Long productId;
 
-	@Column(name = "nome_prod")
+	@Column(name = "nm_prod")
 	private String productName;
 
 	@Column(name = "peso_prod")
 	private Integer productWeight;
 
 	@Column(name = "valor_prod")
-	private Long productValue;
+	private Float productValue;
 
 	@OneToMany(mappedBy = "product")
-	@JoinColumn(name = "cod_prod", nullable = false)
+	@JsonManagedReference(value = "productInRequest")
 	private List<ProductsInRequests> productsInRequestsList;
 
 	// getters and setters
@@ -57,12 +61,12 @@ public class Product
 		this.productWeight = productWeight;
 	}
 
-	public Long getProductValue()
+	public Float getProductValue()
 	{
 		return productValue;
 	}
 
-	public void setProductValue(Long productValue)
+	public void setProductValue(Float productValue)
 	{
 		this.productValue = productValue;
 	}

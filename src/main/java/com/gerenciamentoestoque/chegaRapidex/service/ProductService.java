@@ -3,11 +3,13 @@ package com.gerenciamentoestoque.chegaRapidex.service;
 import com.gerenciamentoestoque.chegaRapidex.entities.Product;
 import com.gerenciamentoestoque.chegaRapidex.repositories.ProductRepository;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class ProductService
 {
 	@Autowired

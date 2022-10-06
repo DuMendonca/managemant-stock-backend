@@ -1,13 +1,18 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Pedidos")
-public class Request
+public class Request implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	// attributes
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,19 +26,25 @@ public class Request
 	private Date requestDate;
 
 	@Column(name = "valor_pedido")
-	private Long requestTotalValue;
+	private Float requestTotalValue;
 
 	@ManyToOne
+	@JoinColumn(name = "cod_destinatario")
+	@JsonBackReference(value = "request-recipient")
 	private Recipient recipient;
 
 	@ManyToOne
+	@JoinColumn(name = "cod_remetente")
+	@JsonBackReference(value = "request-sender")
 	private Sender sender;
 
 	@ManyToOne
+	@JoinColumn(name = "cod_status")
+	@JsonBackReference(value = "request-status")
 	private RequestStatus requestStatus;
 
 	@OneToMany(mappedBy = "request")
-	@JoinColumn(name = "cod_pedido", nullable = false)
+	@JsonManagedReference(value = "requestHasProduct")
 	private List<ProductsInRequests> productsInRequestsList;
 
 	// getters and  setters
@@ -67,12 +78,12 @@ public class Request
 		this.requestDate = requestDate;
 	}
 
-	public Long getRequestTotalValue()
+	public Float getRequestTotalValue()
 	{
 		return requestTotalValue;
 	}
 
-	public void setRequestTotalValue(Long requestTotalValue)
+	public void setRequestTotalValue(Float requestTotalValue)
 	{
 		this.requestTotalValue = requestTotalValue;
 	}

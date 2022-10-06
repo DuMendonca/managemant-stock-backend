@@ -1,5 +1,8 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.io.Serializable;
 import java.sql.Date;
 import java.util.List;
 import javax.persistence.*;
@@ -7,31 +10,35 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Remetente")
-public class Sender
+public class Sender implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	// attributes
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	@Column(name = "cod_remetente")
 	private Long senderId;
 
-	@Column(name = "nome_remetente")
+	@Column(name = "nm_remetente")
 	private String senderName;
 
 	@Column(name = "dt_nasc")
 	private Date senderBirthDate;
 
 	@Column(name = "cpf")
-	private Integer cpf;
+	private String cpf;
 
 	@Column(name = "rg")
-	private Integer rg;
+	private String rg;
 
-	@ManyToOne
-	private Address address;
+	@ManyToOne(fetch = FetchType.LAZY)
+	@JoinColumn(name = "cod_endereco", referencedColumnName = "cod_end")
+	@JsonBackReference(value = "address-sender")
+	private Address addressSender;
 
 	@OneToMany(mappedBy = "sender")
-	@JoinColumn(name = "cod_remetente", nullable = false)
+	@JsonManagedReference(value = "request-sender")
 	private List<Request> requestList;
 
 	// getters and setters
@@ -65,36 +72,38 @@ public class Sender
 		this.senderBirthDate = senderBirthDate;
 	}
 
-	public Integer getCpf()
+	public String getCpf()
 	{
 		return cpf;
 	}
 
-	public void setCpf(Integer cpf)
+	public void setCpf(String cpf)
 	{
 		this.cpf = cpf;
 	}
 
-	public Integer getRg()
+	public String getRg()
 	{
 		return rg;
 	}
 
-	public void setRg(Integer rg)
+	public void setRg(String rg)
 	{
 		this.rg = rg;
 	}
 
-	public Address getAddress()
+	@JsonBackReference
+	public Address getAddressSender()
 	{
-		return address;
+		return addressSender;
 	}
 
-	public void setAddress(Address address)
+	public void setAddressSender(Address addressSender)
 	{
-		this.address = address;
+		this.addressSender = addressSender;
 	}
 
+	@JsonManagedReference
 	public List<Request> getRequestList()
 	{
 		return requestList;

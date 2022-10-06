@@ -3,11 +3,13 @@ package com.gerenciamentoestoque.chegaRapidex.service;
 import com.gerenciamentoestoque.chegaRapidex.entities.Address;
 import com.gerenciamentoestoque.chegaRapidex.repositories.AddressRepository;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class AddressService
 {
 	@Autowired

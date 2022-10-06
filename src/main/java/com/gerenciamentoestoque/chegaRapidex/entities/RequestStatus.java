@@ -1,15 +1,19 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
 
 @Entity
 @Table(name = "Status_Pedido")
-public class RequestStatus
+public class RequestStatus implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	// attributes
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	@Column(name = "cod_status")
 	private Long requestStatusId;
 
@@ -17,7 +21,7 @@ public class RequestStatus
 	private String descriptionStatus;
 
 	@OneToMany(mappedBy = "requestStatus")
-	@JoinColumn(name = "cod_status", nullable = false)
+	@JsonManagedReference(value = "request-status")
 	private List<Request> requestList;
 
 	// getters and setters

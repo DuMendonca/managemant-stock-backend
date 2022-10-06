@@ -3,11 +3,13 @@ package com.gerenciamentoestoque.chegaRapidex.service;
 import com.gerenciamentoestoque.chegaRapidex.entities.Recipient;
 import com.gerenciamentoestoque.chegaRapidex.repositories.RecipientRepository;
 import java.util.List;
+import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
+@Transactional
 public class RecipientService
 {
 	@Autowired
@@ -42,7 +44,7 @@ public class RecipientService
 				response.setRecipientBirthDate(recipient.getRecipientBirthDate());
 				response.setCpf(recipient.getCpf());
 				response.setRg(recipient.getRg());
-				response.setAddress(recipient.getAddress());
+				response.setAddressRecipient(recipient.getAddressRecipient());
 				Recipient recipientUpdated = repository.save(response);
 				return ResponseEntity.ok().body(recipientUpdated);
 			}).orElse(ResponseEntity.notFound().build());
