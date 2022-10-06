@@ -15,7 +15,7 @@ public class Request implements Serializable
 
 	// attributes
 	@Id
-	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@GeneratedValue
 	@Column(name = "cod_pedido")
 	private Long requestId;
 
