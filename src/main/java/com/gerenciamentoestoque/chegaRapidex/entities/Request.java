@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -43,9 +44,15 @@ public class Request implements Serializable
 	@JsonBackReference(value = "request-status")
 	private RequestStatus requestStatus;
 
-	@OneToMany(mappedBy = "request")
+	@OneToMany(mappedBy = "requestId")
 	@JsonManagedReference(value = "requestHasProduct")
-	private List<ProductsInRequests> productsInRequestsList;
+	private List<ProductsRequests> productsInRequestsList;
+
+	@ManyToMany(fetch = FetchType.LAZY)
+	@JoinTable(name = "pedidos_produtos",
+		joinColumns = {@JoinColumn(name = "cod_pedido")},
+		inverseJoinColumns = {@JoinColumn(name = "cod_prod")})
+	private List<Product> productsList = new ArrayList<>();
 
 	// getters and  setters
 	public Long getRequestId()
@@ -118,12 +125,12 @@ public class Request implements Serializable
 		this.requestStatus = requestStatus;
 	}
 
-	public List<ProductsInRequests> getProductsInRequestsList()
+	public List<ProductsRequests> getProductsInRequestsList()
 	{
 		return productsInRequestsList;
 	}
 
-	public void setProductsInRequestsList(List<ProductsInRequests> productsInRequestsList)
+	public void setProductsInRequestsList(List<ProductsRequests> productsInRequestsList)
 	{
 		this.productsInRequestsList = productsInRequestsList;
 	}

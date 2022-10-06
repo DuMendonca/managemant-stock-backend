@@ -6,7 +6,8 @@ import javax.persistence.*;
 
 @Entity
 @Table(name = "Pedidos_Produtos")
-public class ProductsInRequests implements Serializable
+@IdClass(ProductsRequestsId.class)
+public class ProductsRequests implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
@@ -15,36 +16,36 @@ public class ProductsInRequests implements Serializable
 	@ManyToOne
 	@JoinColumn(name = "cod_prod", referencedColumnName = "cod_prod")
 	@JsonBackReference(value = "productInRequest")
-	private Product product;
+	private Product productId;
 
 	@Id
 	@ManyToOne
 	@JoinColumn(name = "cod_pedido", referencedColumnName = "cod_pedido")
 	@JsonBackReference(value = "requestHasProduct")
-	private Request request;
+	private Request requestId;
 
 	@Column(name = "qtd_prod")
 	private Integer quantityProduct;
 
 	// getters and setters
-	public Product getProduct()
+	public Product getProductId()
 	{
-		return product;
+		return productId;
 	}
 
-	public void setProduct(Product product)
+	public void setProductId(Product productId)
 	{
-		this.product = product;
+		this.productId = productId;
 	}
 
-	public Request getRequest()
+	public Request getRequestId()
 	{
-		return request;
+		return requestId;
 	}
 
-	public void setRequest(Request request)
+	public void setRequestId(Request requestId)
 	{
-		this.request = request;
+		this.requestId = requestId;
 	}
 
 	public Integer getQuantityProduct()

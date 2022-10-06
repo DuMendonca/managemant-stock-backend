@@ -2,6 +2,7 @@ package com.gerenciamentoestoque.chegaRapidex.entities;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
 
@@ -26,9 +27,12 @@ public class Product implements Serializable
 	@Column(name = "valor_prod")
 	private Float productValue;
 
-	@OneToMany(mappedBy = "product")
+	@OneToMany(mappedBy = "productId")
 	@JsonManagedReference(value = "productInRequest")
-	private List<ProductsInRequests> productsInRequestsList;
+	private List<ProductsRequests> productsInRequestsList;
+
+	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "productsList")
+	private List<Request> requestsList = new ArrayList<>();
 
 	// getters and setters
 	public Long getProductId()
@@ -71,12 +75,12 @@ public class Product implements Serializable
 		this.productValue = productValue;
 	}
 
-	public List<ProductsInRequests> getProductsInRequestsList()
+	public List<ProductsRequests> getProductsInRequestsList()
 	{
 		return productsInRequestsList;
 	}
 
-	public void setProductsInRequestsList(List<ProductsInRequests> productsInRequestsList)
+	public void setProductsInRequestsList(List<ProductsRequests> productsInRequestsList)
 	{
 		this.productsInRequestsList = productsInRequestsList;
 	}
