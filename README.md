@@ -11,9 +11,10 @@ Realizado os passos anteriores, basta iniciar a aplicação que será buildado n
 - Para Execução: Para a execução  do projeto acessar o https://www.postman.com/ e realizar o cadastro caso não estiver uma conta ou realizar o login.
 Feito isso deverá ser criado uma collections, adicionando uma requisição a mesma. 
 Realizado isso passar os comando REST desejado juntamente com o caminhos que deseja. 
-Ex: http://localhost:8082/request -> Para acessar a tabela Pedido
--> /requestStatus -> Status do pedido
--> /sender -> Remetente
--> /recipient -> Destinatario
--> /address -> Endereco
--> /product -> Produto
+* Ex: http://localhost:8082/request -> Para acessar a tabela Pedido
+* /request -> Pedido
+* /requestStatus -> Status do pedido
+* /sender -> Remetente
+* /recipient -> Destinatario
+* /address -> Endereco
+* /product -> Produto
