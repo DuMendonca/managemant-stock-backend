@@ -9,12 +9,15 @@
 > 2. Exemplos Intellij: https://www.treinaweb.com.br/blog/introducao-ao-maven-aprenda-como-criar-e-gerenciar-projetos-java
 
 1. Primeiramente clonar o projeto e adicionar a uma IDE de sua escolhar.
-2. Configurar a JDK. 
-3. Configurar o MAVEN.
-2. Acessar a pasta _/Banco_ e pegar o dump do Banco de Dados e subir em um banco Postgres.
-3. Alterar o arquivo application.properties como nome do banco de dados em que o dump foi subido, assim como a senha e o user para acesso ao banco de dados. 
-4. Realizar o comando _MVN CLEAN INSTALL_
-5. Iniciar a aplicação na classe **ChegaRapidexApplication** que será buildado normalmente o projeto.
+2. Configurar a JDK (Instalar Java 11)
+3. Configurar o MAVEN (Instalar Maven 3.8.6)
+4. Configurar Maven e Jdk na variavel de ambiente.
+5. Acessar a pasta _/Banco_ e pegar o dump do Banco de Dados e subir em um banco Postgres.
+6. Alterar o arquivo application.properties como nome do banco de dados em que o dump foi subido, assim como a senha e o user para acesso ao banco de dados. 
+7. Realizar a Maven Load para pegar as dependências.
+8. Realizar o comando _MVN CLEAN INSTALL_
+9. Iniciar a aplicação na classe **ChegaRapidexApplication** que será buildado normalmente o projeto.
+10. Caso não funcione Ponto a serem verificados: A versão da JDK, versão do Maven.
 
 ## **Para Execução:** 
 
