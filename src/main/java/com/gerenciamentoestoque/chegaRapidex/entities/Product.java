@@ -5,34 +5,27 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 import javax.persistence.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "Produtos")
+@Document
 public class Product implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
 	// attributes
 	@Id
-	@GeneratedValue
-	@Column(name = "cod_prod")
 	private Long productId;
 
-	@Column(name = "nm_prod")
 	private String productName;
 
-	@Column(name = "peso_prod")
 	private Integer productWeight;
 
-	@Column(name = "valor_prod")
 	private Float productValue;
 
-	@OneToMany(mappedBy = "productId")
-	@JsonManagedReference(value = "productInRequest")
-	private List<ProductsRequests> productsInRequestsList;
-
-	@ManyToMany(fetch = FetchType.LAZY, mappedBy = "productsList")
-	private List<Request> requestsList = new ArrayList<>();
+	@OneToMany
+	@JoinColumn(name = "requestId")
+	@JsonManagedReference(value = "request-product")
+	private List<Request> requests;
 
 	// getters and setters
 	public Long getProductId()
@@ -75,13 +68,13 @@ public class Product implements Serializable
 		this.productValue = productValue;
 	}
 
-	public List<ProductsRequests> getProductsInRequestsList()
+	public List<Request> getRequests()
 	{
-		return productsInRequestsList;
+		return requests;
 	}
 
-	public void setProductsInRequestsList(List<ProductsRequests> productsInRequestsList)
+	public void setRequests(List<Request> requests)
 	{
-		this.productsInRequestsList = productsInRequestsList;
+		this.requests = requests;
 	}
 }

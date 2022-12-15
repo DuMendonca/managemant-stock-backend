@@ -4,8 +4,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document
 @Table(name = "Endereco")
 public class Address implements Serializable
 {
@@ -13,7 +14,7 @@ public class Address implements Serializable
 
 	// attributes
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "cod_end")
 	private Long addressId;
 

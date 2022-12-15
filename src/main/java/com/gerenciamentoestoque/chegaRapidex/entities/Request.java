@@ -3,30 +3,25 @@ package com.gerenciamentoestoque.chegaRapidex.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
-import java.sql.Date;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
-@Table(name = "Pedidos")
+@Document
 public class Request implements Serializable
 {
 	private static final long serialVersionUID = 1L;
 
 	// attributes
 	@Id
-	@GeneratedValue
-	@Column(name = "cod_pedido")
 	private Long requestId;
 
-	@Column(name = "peso_total")
 	private Integer requestTotalWeight;
 
-	@Column(name = "dt_pedido")
 	private Date requestDate;
 
-	@Column(name = "valor_pedido")
 	private Float requestTotalValue;
 
 	@ManyToOne
@@ -44,15 +39,10 @@ public class Request implements Serializable
 	@JsonBackReference(value = "request-status")
 	private RequestStatus requestStatus;
 
-	@OneToMany(mappedBy = "requestId")
-	@JsonManagedReference(value = "requestHasProduct")
-	private List<ProductsRequests> productsInRequestsList;
-
-	@ManyToMany(fetch = FetchType.LAZY)
-	@JoinTable(name = "pedidos_produtos",
-		joinColumns = {@JoinColumn(name = "cod_pedido")},
-		inverseJoinColumns = {@JoinColumn(name = "cod_prod")})
-	private List<Product> productsList = new ArrayList<>();
+	@OneToMany
+	@JoinColumn(name = "productId")
+	@JsonManagedReference(value = "request-product")
+	private List<Product> products;
 
 	// getters and  setters
 	public Long getRequestId()
@@ -125,13 +115,13 @@ public class Request implements Serializable
 		this.requestStatus = requestStatus;
 	}
 
-	public List<ProductsRequests> getProductsInRequestsList()
+	public List<Product> getProducts()
 	{
-		return productsInRequestsList;
+		return products;
 	}
 
-	public void setProductsInRequestsList(List<ProductsRequests> productsInRequestsList)
+	public void setProducts(List<Product> products)
 	{
-		this.productsInRequestsList = productsInRequestsList;
+		this.products = products;
 	}
 }

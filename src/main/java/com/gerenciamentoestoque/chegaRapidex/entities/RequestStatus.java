@@ -4,8 +4,9 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
 import java.util.List;
 import javax.persistence.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
-@Entity
+@Document
 @Table(name = "Status_Pedido")
 public class RequestStatus implements Serializable
 {
@@ -13,7 +14,7 @@ public class RequestStatus implements Serializable
 
 	// attributes
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "cod_status")
 	private Long requestStatusId;
 

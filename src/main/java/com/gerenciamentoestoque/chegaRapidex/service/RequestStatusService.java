@@ -41,13 +41,13 @@ public class RequestStatusService
 		return repository.findById(id)
 			.map(response -> {
 				response.setDescriptionStatus(requestStatus.getDescriptionStatus());
-				RequestStatus requestStatusUpdated = repository.saveAndFlush(response);
+				RequestStatus requestStatusUpdated = repository.save(response);
 				return ResponseEntity.ok().body(requestStatusUpdated);
 			}).orElse(ResponseEntity.notFound().build());
 	}
 
 	public RequestStatus createRequestStatus(RequestStatus requestStatus) {
-		return repository.saveAndFlush(requestStatus);
+		return repository.save(requestStatus);
 	}
 
 	public ResponseEntity<RequestStatus> deleteAllRequestStatus() {

@@ -3,12 +3,13 @@ package com.gerenciamentoestoque.chegaRapidex.entities;
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import java.io.Serializable;
-import java.sql.Date;
+import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
+import org.springframework.data.mongodb.core.mapping.Document;
 
 
-@Entity
+@Document
 @Table(name = "Remetente")
 public class Sender implements Serializable
 {
@@ -16,7 +17,7 @@ public class Sender implements Serializable
 
 	// attributes
 	@Id
-	@GeneratedValue
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	@Column(name = "cod_remetente")
 	private Long senderId;
 

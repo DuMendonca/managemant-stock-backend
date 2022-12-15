@@ -4,18 +4,22 @@ import com.gerenciamentoestoque.chegaRapidex.entities.Product;
 import com.gerenciamentoestoque.chegaRapidex.entities.ProductsRequests;
 import com.gerenciamentoestoque.chegaRapidex.entities.Request;
 import com.gerenciamentoestoque.chegaRapidex.repositories.*;
+import com.gerenciamentoestoque.chegaRapidex.repositories.DAL.*;
 import java.sql.Date;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.Scanner;
 import java.util.concurrent.atomic.AtomicInteger;
+import org.hibernate.sql.Delete;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.CommandLineRunner;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
+import org.springframework.data.mongodb.repository.config.EnableMongoRepositories;
 
 @SpringBootApplication
+@EnableMongoRepositories
 public class ChegaRapidexApplication implements CommandLineRunner {
 
 	@Autowired
@@ -32,6 +36,22 @@ public class ChegaRapidexApplication implements CommandLineRunner {
 	private RequestRepository requestRepository;
 	@Autowired
 	private ProductsRequestsRepository productsRequestsRepository;
+
+
+	//DAL
+	@Autowired
+	private ProductDAL productDAL;
+	@Autowired
+	private RequestDAL requestDAL;
+	@Autowired
+	private RequestStatusDAL requestStatusDAL;
+	@Autowired
+	private SenderDAL senderDAL;
+	@Autowired
+	private RecipientDAL recipientDAL;
+	@Autowired
+	private AddressDAL addressDAL;
+
 
 	private Scanner sc = new Scanner(System.in);
 	private int opcaoMenu = 0;
@@ -135,10 +155,10 @@ public class ChegaRapidexApplication implements CommandLineRunner {
 		switch (opcaoMenu)
 		{
 			case 1:
-				requestRepository.deleteById(idToDelete);
+				requestDAL.deleteRequestById(idToDelete);
 				break;
 			case 2:
-				productRepository.deleteById(idToDelete);
+				productDAL.deleteProductById(idToDelete);
 				break;
 			default:
 				System.out.println("Opção inválida! Selecione uma opção valida!");
@@ -192,30 +212,28 @@ public class ChegaRapidexApplication implements CommandLineRunner {
 	{
 		Request request = new Request();
 
+		System.out.println("Insira o ID do pedido: ");
+		request.setRequestId(sc.nextLong());
 		System.out.println("Insira o valor total do pedido: ");
 		request.setRequestTotalValue(sc.nextFloat());
 		System.out.println("Insira o peso total do pedido: ");
 		request.setRequestTotalWeight(sc.nextInt());
 		System.out.println("Insira o Id do Status do Pedido: ");
-		request.setRequestStatus(requestStatusRepository.findById(sc.nextLong()).get());
+		request.setRequestStatus(requestStatusDAL.findRequestStatusById(sc.nextLong()));
 		System.out.println("Insira o Id do Destinátario: ");
-		request.setRecipient(recipientRepository.findById(sc.nextLong()).get());
+		request.setRecipient(recipientDAL.findRecipientById(sc.nextLong()));
 		System.out.println("Insira o Id do Remetente: ");
-		request.setSender(senderRepository.findById(sc.nextLong()).get());
+		request.setSender(senderDAL.findSenderById(sc.nextLong()));
 		request.setRequestDate(new Date(new java.util.Date().getTime()));
 
-		List<ProductsRequests> list = new ArrayList<>();
-		ProductsRequests productsRequests = new ProductsRequests();
-		productsRequests.setRequestId(request);
+		List<Product> productList = new ArrayList<>();
 
 		System.out.println("Adicione o produto no pedido: ");
 		boolean exit = false;
 		while (!exit)
 		{
 			System.out.println("Selecione o Id do produto: ");
-			productsRequests.setProductId(productRepository.findById(sc.nextLong()).get());
-			System.out.println("Selecione a quantidade de produto: ");
-			productsRequests.setQuantityProduct(sc.nextInt());
+			productList.add(productDAL.findProductById(sc.nextLong()));
 			System.out.println("Deseja adicionar mais produtos ? (1 - SIM | 0 - NÃO)");
 			int opcao = sc.nextInt();
 			if (opcao == 0)
@@ -223,7 +241,7 @@ public class ChegaRapidexApplication implements CommandLineRunner {
 				exit = true;
 			}
 		}
-		request.setProductsInRequestsList(list);
+		request.setProducts(productList);
 
 		requestRepository.save(request);
 	}
@@ -232,6 +250,9 @@ public class ChegaRapidexApplication implements CommandLineRunner {
 	{
 		Product product = new Product();
 
+		System.out.println("Insira o ID do produto: ");
+		product.setProductId(sc.nextLong());
+		sc.nextLine();
 		System.out.println("Insira o nome do produto: ");
 		product.setProductName(sc.nextLine());
 		System.out.println("Insira o valor do produto: ");
@@ -252,27 +273,19 @@ public class ChegaRapidexApplication implements CommandLineRunner {
 		System.out.println("Insira o peso total do pedido a ser alterado: ");
 		request.setRequestTotalWeight(sc.nextInt());
 		System.out.println("Insira o Id do Status do Pedido  a ser alterado: ");
-		request.setRequestStatus(requestStatusRepository.findById(sc.nextLong()).get());
+		request.setRequestStatus(requestStatusDAL.findRequestStatusById(sc.nextLong()));
 		System.out.println("Insira o Id do Destinátario a ser alterado: ");
-		request.setRecipient(recipientRepository.findById(sc.nextLong()).get());
+		request.setRecipient(recipientDAL.findRecipientById(sc.nextLong()));
 		System.out.println("Insira o Id do Remetente aser alterado: ");
-		request.setSender(senderRepository.findById(sc.nextLong()).get());
+		request.setSender(senderDAL.findSenderById(sc.nextLong()));
 
-		requestRepository.findById(id)
-			.map(response -> {
-				response.setRequestTotalValue(request.getRequestTotalValue());
-				response.setRequestTotalWeight(request.getRequestTotalWeight());
-				response.setRequestStatus(request.getRequestStatus());
-				response.setSender(request.getSender());
-				response.setRecipient(request.getRecipient());
-				Request requestUpdated = requestRepository.save(response);
-				return requestUpdated;
-			});
+		requestDAL.updateRequestById(request, id);
 	}
 
 	private void updateProduct(long id)
 	{
 		Product product = new Product();
+		sc.nextLine();
 
 		System.out.println("Insira o nome do produto a ser alterado: ");
 		product.setProductName(sc.nextLine());
@@ -281,14 +294,7 @@ public class ChegaRapidexApplication implements CommandLineRunner {
 		System.out.println("Insira o peso do produto a ser alterado: ");
 		product.setProductWeight(sc.nextInt());
 
-		productRepository.findById(id)
-			.map(response -> {
-				response.setProductName(product.getProductName());
-				response.setProductValue(product.getProductValue());
-				response.setProductWeight(product.getProductWeight());
-				Product productUpdated = productRepository.save(response);
-				return productUpdated;
-			});
+		productDAL.updateProductById(product, id);
 	}
 
 	// Find Values
@@ -386,25 +392,22 @@ public class ChegaRapidexApplication implements CommandLineRunner {
 			System.out.println("Peso Total do Pedido: " + request.getRequestTotalWeight());
 			System.out.println("Valor Total do Pedido: " + request.getRequestTotalValue());
 			System.out.print("Produtos:  \n");
-			System.out.print("[");
-			productsRequestsRepository.findAll()
-				.stream()
-				.filter(productsRequests -> productsRequests.getRequestId().getRequestId().equals(request.getRequestId()))
-				.forEach(productsRequest -> {
-					Optional<Product> product = productRepository
-						.findById(productsRequest.getProductId().getProductId());
 
-					if (product.isPresent())
+				request.getProducts()
+				.forEach(product -> {
+					if (product != null)
 					{
-						System.out.print("Id do Produto: " + product.get().getProductId());
-						System.out.print(", Nome do Produto: " + product.get().getProductName());
+						System.out.print("[");
+						System.out.print("Id do Produto: " + product.getProductId());
+						System.out.print(", Nome do Produto: " + product.getProductName());
 						quanityProducts.getAndIncrement();
+						System.out.println("]");
+
 					}
 					else {
 						System.out.println("Produto não encontrado!");
 					}
 				});
-			System.out.println("]");
 			System.out.println("Quantidade de Produtos: " + quanityProducts.get());
 			System.out.print("\n");
 		});
