@@ -75,7 +75,7 @@ public class ChegaRapidexApplication implements CommandLineRunner {
 			System.out.println("3 - Visualização de Destinatario");
 			System.out.println("4 - Visualização de Endereço");
 			System.out.println("5 - Visualização de Rementente");
-			System.out.println("6 - Visualização de Status do Produtos");
+			System.out.println("6 - Visualização de Status do Pedido");
 			System.out.println("7 - Relatório de Pedidos");
 			System.out.println("8 - Relatório de Produtos ");
 			System.out.println("9 - Sair");
