@@ -1,0 +1,10 @@
+[{
+  "_id": {
+    "$oid": "639a6ca3e3d2110a2b21c4a7"
+  },
+  "addressId": 1,
+  "city": "Blumenau",
+  "road": "Rua Joinville",
+  "number": 20,
+  "_class": "com.gerenciamentoestoque.chegaRapidex.entities.Address"
+}]

@@ -1,0 +1,21 @@
+[{
+  "_id": {
+    "$oid": "6399265999de2c0ba799b12d"
+  },
+  "senderId": 1,
+  "senderName": "Mendonça",
+  "senderBirthDate": {
+    "$date": {
+      "$numberLong": "1032739200000"
+    }
+  },
+  "cpf": "1111313",
+  "rg": "000000",
+  "addressSender": {
+    "addressId": 1,
+    "city": "Joinville",
+    "road": "Rua Brasil",
+    "number": 202
+  },
+  "_class": "com.gerenciamentoestoque.chegaRapidex.entities.Sender"
+}]

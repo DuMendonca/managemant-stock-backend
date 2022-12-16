@@ -1,0 +1,20 @@
+[{
+  "_id": {
+    "$oid": "639a6c50e3d2110a2b21c4a6"
+  },
+  "recipientId": 1,
+  "recipientName": "Fernado",
+  "recipientBirthDate": {
+    "$date": {
+      "$numberLong": "971136000000"
+    }
+  },
+  "cpf": "12345",
+  "rg": "8888",
+  "addressRecipient": {
+    "addressId": 1,
+    "city": "Joinville",
+    "road": "Rua dos Anjos"
+  },
+  "_class": "com.gerenciamentoestoque.chegaRapidex.entities.Recipient"
+}]

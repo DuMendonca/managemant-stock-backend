@@ -1,0 +1,193 @@
+[{
+  "_id": {
+    "$oid": "639b52081e37b8410a881782"
+  },
+  "requestId": 1,
+  "requestTotalWeight": 10,
+  "requestDate": {
+    "$date": {
+      "$numberLong": "1671123458943"
+    }
+  },
+  "requestTotalValue": 10,
+  "recipient": {
+    "recipientId": 1,
+    "recipientName": "Fernado",
+    "recipientBirthDate": {
+      "$date": {
+        "$numberLong": "971136000000"
+      }
+    },
+    "cpf": "12345",
+    "rg": "8888",
+    "addressRecipient": {
+      "addressId": 1,
+      "city": "Joinville",
+      "road": "Rua dos Anjos"
+    }
+  },
+  "sender": {
+    "senderId": 1,
+    "senderName": "Mendonça",
+    "senderBirthDate": {
+      "$date": {
+        "$numberLong": "1032739200000"
+      }
+    },
+    "cpf": "1111313",
+    "rg": "000000",
+    "addressSender": {
+      "addressId": 1,
+      "city": "Joinville",
+      "road": "Rua Brasil",
+      "number": 202
+    }
+  },
+  "requestStatus": {
+    "requestStatusId": 1,
+    "descriptionStatus": "Em Atraso"
+  },
+  "products": [
+    {
+      "productId": 1,
+      "productName": "Notebook",
+      "productWeight": 10,
+      "productValue": 100
+    }
+  ],
+  "_class": "com.gerenciamentoestoque.chegaRapidex.entities.Request"
+},{
+  "_id": {
+    "$oid": "639b52371e37b8410a881783"
+  },
+  "requestId": 2,
+  "requestTotalWeight": 10,
+  "requestDate": {
+    "$date": {
+      "$numberLong": "1671123497407"
+    }
+  },
+  "requestTotalValue": 10,
+  "recipient": {
+    "recipientId": 1,
+    "recipientName": "Fernado",
+    "recipientBirthDate": {
+      "$date": {
+        "$numberLong": "971136000000"
+      }
+    },
+    "cpf": "12345",
+    "rg": "8888",
+    "addressRecipient": {
+      "addressId": 1,
+      "city": "Joinville",
+      "road": "Rua dos Anjos"
+    }
+  },
+  "sender": {
+    "senderId": 1,
+    "senderName": "Mendonça",
+    "senderBirthDate": {
+      "$date": {
+        "$numberLong": "1032739200000"
+      }
+    },
+    "cpf": "1111313",
+    "rg": "000000",
+    "addressSender": {
+      "addressId": 1,
+      "city": "Joinville",
+      "road": "Rua Brasil",
+      "number": 202
+    }
+  },
+  "requestStatus": {
+    "requestStatusId": 1,
+    "descriptionStatus": "Em Atraso"
+  },
+  "products": [
+    {
+      "productId": 1,
+      "productName": "Notebook",
+      "productWeight": 10,
+      "productValue": 100
+    },
+    {
+      "productId": 2,
+      "productName": "B",
+      "productWeight": 1,
+      "productValue": 10
+    }
+  ],
+  "_class": "com.gerenciamentoestoque.chegaRapidex.entities.Request"
+},{
+  "_id": {
+    "$oid": "639b9f6d9867a2605e255e63"
+  },
+  "requestId": 3,
+  "requestTotalWeight": 10,
+  "requestDate": {
+    "$date": {
+      "$numberLong": "1671143237799"
+    }
+  },
+  "requestTotalValue": 10,
+  "recipient": {
+    "recipientId": 1,
+    "recipientName": "Fernado",
+    "recipientBirthDate": {
+      "$date": {
+        "$numberLong": "971136000000"
+      }
+    },
+    "cpf": "12345",
+    "rg": "8888",
+    "addressRecipient": {
+      "addressId": 1,
+      "city": "Joinville",
+      "road": "Rua dos Anjos"
+    }
+  },
+  "sender": {
+    "senderId": 1,
+    "senderName": "Mendonça",
+    "senderBirthDate": {
+      "$date": {
+        "$numberLong": "1032739200000"
+      }
+    },
+    "cpf": "1111313",
+    "rg": "000000",
+    "addressSender": {
+      "addressId": 1,
+      "city": "Joinville",
+      "road": "Rua Brasil",
+      "number": 202
+    }
+  },
+  "requestStatus": {
+    "requestStatusId": 1,
+    "descriptionStatus": "Em Atraso"
+  },
+  "products": [
+    {
+      "productId": 1,
+      "productName": "Notebook",
+      "productWeight": 10,
+      "productValue": 100
+    },
+    {
+      "productId": 2,
+      "productName": "B",
+      "productWeight": 1,
+      "productValue": 10
+    },
+    {
+      "productId": 3,
+      "productName": "TV",
+      "productWeight": 10,
+      "productValue": 10
+    }
+  ],
+  "_class": "com.gerenciamentoestoque.chegaRapidex.entities.Request"
+}]

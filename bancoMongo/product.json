@@ -1,0 +1,30 @@
+[{
+  "_id": {
+    "$oid": "639a6cb5e3d2110a2b21c4a8"
+  },
+  "productId": 1,
+  "productName": "Notebook",
+  "productWeight": 10,
+  "productValue": 100,
+  "requestsList": [],
+  "_class": "com.gerenciamentoestoque.chegaRapidex.entities.Product"
+},{
+  "_id": {
+    "$oid": "639a71582835a01baffb24c3"
+  },
+  "productId": 2,
+  "productName": "B",
+  "productWeight": 1,
+  "productValue": 10,
+  "requestsList": [],
+  "_class": "com.gerenciamentoestoque.chegaRapidex.entities.Product"
+},{
+  "_id": {
+    "$oid": "639b9d58bd63d5613279b270"
+  },
+  "productId": 3,
+  "productName": "TV",
+  "productWeight": 10,
+  "productValue": 10,
+  "_class": "com.gerenciamentoestoque.chegaRapidex.entities.Product"
+}]
