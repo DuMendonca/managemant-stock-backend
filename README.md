@@ -19,7 +19,21 @@
 9. Iniciar a aplicação na classe **ChegaRapidexApplication** que será buildado normalmente o projeto.
 10. Caso não funcione Ponto a serem verificados: A versão da JDK, versão do Maven.
 
-## **Para Execução:** 
+## **Para Conexão via MongoDB:** 
+1. Alterar no arquivo application.properties
+2. Modificar a conexão para pegar a porta configurada ao subira a aplicação do MongoDBCompass.
+3. Pegas os Exports da Collections nas pasta **bancoMongo**.
+4. Realizar a importação das collections.
+
+
+## **Para Execução via Console:** 
+
+1. Selecionar a Aplicação desejada
+2. Após iniciar a aplicação Spring Boot
+3. Selecionar as opção selecionada no menu.
+
+
+## **Para Execução via Rest:** 
 
 1. Acessar o https://www.postman.com/ ou baixar o aplicativo de Desktop.
 2. Realizar o cadastro caso não estiver uma conta ou realizar o login.
