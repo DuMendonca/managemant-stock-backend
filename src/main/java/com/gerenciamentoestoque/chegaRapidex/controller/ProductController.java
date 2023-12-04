@@ -15,7 +15,7 @@ public class ProductController
 	private ProductService service;
 
 	@GetMapping(path = {"/{id}"})
-	public ResponseEntity<Product> findProductById(@PathVariable Long id){
+	public ResponseEntity<Product> findProductById(@PathVariable String id){
 		return service.findProductById(id);
 	}
 
@@ -25,12 +25,12 @@ public class ProductController
 	}
 
 	@DeleteMapping(path = {"/{id}"})
-	public void deleteProductById(@PathVariable Long id) {
+	public void deleteProductById(@PathVariable String id) {
 		service.deleteProductById(id);
 	}
 
 	@PutMapping(path = {"/{id}"})
-	public ResponseEntity<Product> updateProduct(@PathVariable Long id, @RequestBody Product product) {
+	public ResponseEntity<Product> updateProduct(@PathVariable String id, @RequestBody Product product) {
 		return service.updateProduct(id, product);
 	}
 

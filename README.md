@@ -39,12 +39,12 @@
 2. Realizar o cadastro caso não estiver uma conta ou realizar o login.
 3. Criar uma collections, adicionando uma requisição a mesma. 
 4. Realizar os comando REST desejado juntamente com o caminhos que deseja. 
-* Ex: http://localhost:8082/request -> Para acessar a tabela Pedido
+* Ex: http://localhost:8082/order -> Para acessar a tabela Pedido
 * http://{server/ip}:{porta configurada no application.properties}/{Requisição REST}.
 
 ## **Requisições REST**
 
-1. /request -> Pedido
+1. /order -> Pedido
 2. /requestStatus -> Status do pedido
 3. /sender -> Remetente
 4. /recipient -> Destinatario
@@ -56,5 +56,5 @@
 * PUT -> Alterar 
 * DELETE -> Deletar (Para deletar um único valor, passar o Id como parametro da chamada)
 * GET -> Consultar (Para consultar um único valor, passar o Id como parametro da chamada)
- 1. http://localhost:8082/request/{id} --> Apenas um registro.
- 2. http://localhost:8082/request/ --> Todos os registros.
+ 1. http://localhost:8082/order/{id} --> Apenas um registro.
+ 2. http://localhost:8082/order/ --> Todos os registros.

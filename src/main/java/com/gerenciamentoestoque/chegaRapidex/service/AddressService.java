@@ -3,19 +3,17 @@ package com.gerenciamentoestoque.chegaRapidex.service;
 import com.gerenciamentoestoque.chegaRapidex.entities.Address;
 import com.gerenciamentoestoque.chegaRapidex.repositories.AddressRepository;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
 public class AddressService
 {
 	@Autowired
 	private AddressRepository repository;
 
-	public ResponseEntity<Address> findAddressById(Long id){
+	public ResponseEntity<Address> findAddressById(String id){
 		return repository.findById(id)
 			.map(response -> ResponseEntity.ok().body(response))
 			.orElse(ResponseEntity.notFound().build());
@@ -29,7 +27,7 @@ public class AddressService
 		return ResponseEntity.ok().body(addresses);
 	}
 
-	public ResponseEntity<Object> deleteAddressById(Long id) {
+	public ResponseEntity<Object> deleteAddressById(String id) {
 		return repository.findById(id)
 			.map(response -> {
 				repository.deleteById(id);
@@ -37,7 +35,7 @@ public class AddressService
 			}).orElse(ResponseEntity.notFound().build());
 	}
 
-	public ResponseEntity<Address> updateAddress(Long id, Address address) {
+	public ResponseEntity<Address> updateAddress(String id, Address address) {
 		return repository.findById(id)
 			.map(response -> {
 				response.setCity(address.getCity());

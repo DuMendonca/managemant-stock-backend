@@ -15,7 +15,7 @@ public class AddressController
 	private AddressService service;
 
 	@GetMapping(path = {"/{id}"})
-	public ResponseEntity<Address> findAddressById(@PathVariable Long id){
+	public ResponseEntity<Address> findAddressById(@PathVariable String id){
 		return service.findAddressById(id);
 	}
 
@@ -25,12 +25,12 @@ public class AddressController
 	}
 
 	@DeleteMapping(path = {"/{id}"})
-	public void deleteAddressById(@PathVariable Long id) {
+	public void deleteAddressById(@PathVariable String id) {
 		service.deleteAddressById(id);
 	}
 
 	@PutMapping(path = {"/{id}"})
-	public ResponseEntity<Address> updateAddress(@PathVariable Long id, @RequestBody Address address) {
+	public ResponseEntity<Address> updateAddress(@PathVariable String id, @RequestBody Address address) {
 		return service.updateAddress(id, address);
 	}
 

@@ -3,19 +3,17 @@ package com.gerenciamentoestoque.chegaRapidex.service;
 import com.gerenciamentoestoque.chegaRapidex.entities.Recipient;
 import com.gerenciamentoestoque.chegaRapidex.repositories.RecipientRepository;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
 public class RecipientService
 {
 	@Autowired
 	private RecipientRepository repository;
 
-	public ResponseEntity<Recipient> findRecipientById(Long id){
+	public ResponseEntity<Recipient> findRecipientById(String id){
 		return repository.findById(id)
 			.map(response -> ResponseEntity.ok().body(response))
 			.orElse(ResponseEntity.notFound().build());
@@ -29,7 +27,7 @@ public class RecipientService
 		return ResponseEntity.ok().body(recipients);
 	}
 
-	public ResponseEntity<Object> deleteRecipientById(Long id) {
+	public ResponseEntity<Object> deleteRecipientById(String id) {
 		return repository.findById(id)
 			.map(response -> {
 				repository.deleteById(id);
@@ -37,7 +35,7 @@ public class RecipientService
 			}).orElse(ResponseEntity.notFound().build());
 	}
 
-	public ResponseEntity<Recipient> updateRecipient(Long id, Recipient recipient) {
+	public ResponseEntity<Recipient> updateRecipient(String id, Recipient recipient) {
 		return repository.findById(id)
 			.map(response -> {
 				response.setRecipientName(recipient.getRecipientName());

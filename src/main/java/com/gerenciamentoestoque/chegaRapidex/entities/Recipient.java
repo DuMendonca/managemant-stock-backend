@@ -1,45 +1,26 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
-@Table(name = "Destinatario")
-public class Recipient implements Serializable
+@Document ("recipient")
+public class Recipient
 {
-	private static final long serialVersionUID = 1L;
-
 	// attributes
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "cod_destinatario")
 	private Long recipientId;
 
-	@Column(name = "nm_destinatario")
 	private String recipientName;
 
-	@Column(name = "dt_nasc")
 	private Date recipientBirthDate;
 
-	@Column(name = "cpf")
 	private String cpf;
 
-	@Column(name = "rg")
 	private String rg;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cod_endereco", referencedColumnName = "cod_end")
-	@JsonBackReference(value = "address-recipient")
 	private Address addressRecipient;
-
-	@OneToMany(mappedBy = "recipient")
-	@JsonManagedReference(value = "request-recipient")
-	private List<Request> requestList;
 
 	// getters and setters
 	public Long getRecipientId()
@@ -100,15 +81,5 @@ public class Recipient implements Serializable
 	public void setAddressRecipient(Address addressRecipient)
 	{
 		this.addressRecipient = addressRecipient;
-	}
-
-	public List<Request> getRequestList()
-	{
-		return requestList;
-	}
-
-	public void setRequestList(List<Request> requestList)
-	{
-		this.requestList = requestList;
 	}
 }

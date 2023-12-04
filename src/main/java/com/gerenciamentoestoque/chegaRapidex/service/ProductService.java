@@ -3,19 +3,17 @@ package com.gerenciamentoestoque.chegaRapidex.service;
 import com.gerenciamentoestoque.chegaRapidex.entities.Product;
 import com.gerenciamentoestoque.chegaRapidex.repositories.ProductRepository;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
 public class ProductService
 {
 	@Autowired
 	private ProductRepository repository;
 
-	public ResponseEntity<Product> findProductById(Long id){
+	public ResponseEntity<Product> findProductById(String id){
 		return repository.findById(id)
 			.map(response -> ResponseEntity.ok().body(response))
 			.orElse(ResponseEntity.notFound().build());
@@ -29,7 +27,7 @@ public class ProductService
 		return ResponseEntity.ok().body(products);
 	}
 
-	public ResponseEntity<Object> deleteProductById(Long id) {
+	public ResponseEntity<Object> deleteProductById(String id) {
 		return repository.findById(id)
 			.map(response -> {
 				repository.deleteById(id);
@@ -37,7 +35,7 @@ public class ProductService
 			}).orElse(ResponseEntity.notFound().build());
 	}
 
-	public ResponseEntity<Product> updateProduct(Long id, Product product) {
+	public ResponseEntity<Product> updateProduct(String id, Product product) {
 		return repository.findById(id)
 			.map(response -> {
 				response.setProductName(product.getProductName());

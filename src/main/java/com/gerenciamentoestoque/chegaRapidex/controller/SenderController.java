@@ -14,7 +14,7 @@ public class SenderController
 	private SenderService service;
 
 	@GetMapping(path = {"/{id}"})
-	public ResponseEntity<Sender> findSenderById(@PathVariable Long id){
+	public ResponseEntity<Sender> findSenderById(@PathVariable String id){
 		return service.findSenderById(id);
 	}
 
@@ -24,12 +24,12 @@ public class SenderController
 	}
 
 	@DeleteMapping(path = {"/{id}"})
-	public void deleteSenderById(@PathVariable Long id) {
+	public void deleteSenderById(@PathVariable String id) {
 		service.deleteSenderById(id);
 	}
 
 	@PutMapping(path = {"/{id}"})
-	public ResponseEntity<Sender> updateSender(@PathVariable Long id, @RequestBody Sender sender) {
+	public ResponseEntity<Sender> updateSender(@PathVariable String id, @RequestBody Sender sender) {
 		return service.updateSender(id, sender);
 	}
 

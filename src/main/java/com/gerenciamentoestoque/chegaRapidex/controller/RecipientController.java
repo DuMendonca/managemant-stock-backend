@@ -14,7 +14,7 @@ public class RecipientController
 	private RecipientService service;
 
 	@GetMapping(path = {"/{id}"})
-	public ResponseEntity<Recipient> findRecipientById(@PathVariable Long id){
+	public ResponseEntity<Recipient> findRecipientById(@PathVariable String id){
 		return service.findRecipientById(id);
 	}
 
@@ -24,12 +24,12 @@ public class RecipientController
 	}
 
 	@DeleteMapping(path = {"/{id}"})
-	public void deleteRecipientById(@PathVariable Long id) {
+	public void deleteRecipientById(@PathVariable String id) {
 		service.deleteRecipientById(id);
 	}
 
 	@PutMapping(path = {"/{id}"})
-	public ResponseEntity<Recipient> updateRecipient(@PathVariable Long id, @RequestBody Recipient recipient) {
+	public ResponseEntity<Recipient> updateRecipient(@PathVariable String id, @RequestBody Recipient recipient) {
 		return service.updateRecipient(id, recipient);
 	}
 

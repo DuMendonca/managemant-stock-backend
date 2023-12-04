@@ -3,19 +3,17 @@ package com.gerenciamentoestoque.chegaRapidex.service;
 import com.gerenciamentoestoque.chegaRapidex.entities.Sender;
 import com.gerenciamentoestoque.chegaRapidex.repositories.SenderRepository;
 import java.util.List;
-import javax.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 @Service
-@Transactional
 public class SenderService
 {
 	@Autowired
 	private SenderRepository repository;
 
-	public ResponseEntity<Sender> findSenderById(Long id){
+	public ResponseEntity<Sender> findSenderById(String id){
 		return repository.findById(id)
 			.map(response -> ResponseEntity.ok().body(response))
 			.orElse(ResponseEntity.notFound().build());
@@ -29,7 +27,7 @@ public class SenderService
 		return ResponseEntity.ok().body(senders);
 	}
 
-	public ResponseEntity<Object> deleteSenderById(Long id) {
+	public ResponseEntity<Object> deleteSenderById(String id) {
 		return repository.findById(id)
 			.map(response -> {
 				repository.deleteById(id);
@@ -37,7 +35,7 @@ public class SenderService
 			}).orElse(ResponseEntity.notFound().build());
 	}
 
-	public ResponseEntity<Sender> updateSender(Long id, Sender sender) {
+	public ResponseEntity<Sender> updateSender(String id, Sender sender) {
 		return repository.findById(id)
 			.map(response -> {
 				response.setSenderName(sender.getSenderName());

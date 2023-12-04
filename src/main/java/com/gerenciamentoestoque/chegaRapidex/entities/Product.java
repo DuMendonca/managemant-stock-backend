@@ -1,17 +1,12 @@
 package com.gerenciamentoestoque.chegaRapidex.entities;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.List;
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
-public class Product implements Serializable
+@Document("product")
+public class Product
 {
-	private static final long serialVersionUID = 1L;
-
 	// attributes
 	@Id
 	private Long productId;
@@ -22,10 +17,7 @@ public class Product implements Serializable
 
 	private Float productValue;
 
-	@OneToMany
-	@JoinColumn(name = "requestId")
-	@JsonManagedReference(value = "request-product")
-	private List<Request> requests;
+	private List<Order> orders;
 
 	// getters and setters
 	public Long getProductId()
@@ -68,13 +60,13 @@ public class Product implements Serializable
 		this.productValue = productValue;
 	}
 
-	public List<Request> getRequests()
+	public List<Order> getRequests()
 	{
-		return requests;
+		return orders;
 	}
 
-	public void setRequests(List<Request> requests)
+	public void setRequests(List<Order> orders)
 	{
-		this.requests = requests;
+		this.orders = orders;
 	}
 }

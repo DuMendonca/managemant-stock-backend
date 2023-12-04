@@ -2,45 +2,28 @@ package com.gerenciamentoestoque.chegaRapidex.entities;
 
 import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
-import javax.persistence.*;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 
-@Document
-@Table(name = "Remetente")
-public class Sender implements Serializable
+@Document("sender")
+public class Sender
 {
-	private static final long serialVersionUID = 1L;
-
 	// attributes
 	@Id
-	@GeneratedValue(strategy = GenerationType.AUTO)
-	@Column(name = "cod_remetente")
 	private Long senderId;
 
-	@Column(name = "nm_remetente")
 	private String senderName;
 
-	@Column(name = "dt_nasc")
 	private Date senderBirthDate;
 
-	@Column(name = "cpf")
 	private String cpf;
 
-	@Column(name = "rg")
 	private String rg;
 
-	@ManyToOne(fetch = FetchType.LAZY)
-	@JoinColumn(name = "cod_endereco", referencedColumnName = "cod_end")
-	@JsonBackReference(value = "address-sender")
 	private Address addressSender;
-
-	@OneToMany(mappedBy = "sender")
-	@JsonManagedReference(value = "request-sender")
-	private List<Request> requestList;
 
 	// getters and setters
 	public Long getSenderId()
@@ -93,7 +76,6 @@ public class Sender implements Serializable
 		this.rg = rg;
 	}
 
-	@JsonBackReference
 	public Address getAddressSender()
 	{
 		return addressSender;
@@ -102,16 +84,5 @@ public class Sender implements Serializable
 	public void setAddressSender(Address addressSender)
 	{
 		this.addressSender = addressSender;
-	}
-
-	@JsonManagedReference
-	public List<Request> getRequestList()
-	{
-		return requestList;
-	}
-
-	public void setRequestList(List<Request> requestList)
-	{
-		this.requestList = requestList;
 	}
 }
